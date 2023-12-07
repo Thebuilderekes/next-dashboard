@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function CustomerPage() {
   return (
     <div>
-        <p>customers</p>
+      <p>customerss</p>
     </div>
-  )
+  );
 }
 
-export default CustomerPage
+export default CustomerPage;
