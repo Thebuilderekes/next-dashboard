@@ -46,9 +46,7 @@ We use `clsx` to conditionally render the classNames of the button for example, 
 
 # next-dashboard
 
-
 ## Database
-
 
 We setup database using vercel storage option under the project, created postgres server, connected and navigated to env local tab,
 show secrets and grabbed the details in there, pasted in .env file in local and made sure the file name was written in .gitignore
@@ -60,10 +58,10 @@ Nextjs uses route Handlers to create API endpoints
 We are using SQL to fetch data because SQL allows you to write targeted queries to fetch and manipulate specific data.
 
 ### Static and Dynamic rendering
+
 Our aim is to make the dashboard page dynamic so that it can allow live updating. We do this by opting out of the default behaviour of static rendering and switching to dynamic rendering
 
 ### import { unstable_noStore as noStore } from 'next/cache';
-
 
 In Next.js 14, the code `import { unstable_noStore as noStore } from 'next/cache';` serves a specific purpose:
 
@@ -71,23 +69,38 @@ In Next.js 14, the code `import { unstable_noStore as noStore } from 'next/cache
 
 Here's a breakdown of its components:
 
-* `import`: Keyword used to import functionalities from another module.
-* `{ unstable_noStore as noStore }`: Imports the `unstable_noStore` function and renames it to `noStore` for easier usage.
-* `from 'next/cache'`: Specifies the module from where we are importing the function. In this case, it's the `next/cache` module, which provides functions related to data caching in Next.js.
-* `unstable_noStore`: This function is considered "unstable" as it may change in future versions of Next.js. However, it's currently used to disable static rendering and caching for a specific component.
+- `import`: Keyword used to import functionalities from another module.
+- `{ unstable_noStore as noStore }`: Imports the `unstable_noStore` function and renames it to `noStore` for easier usage.
+- `from 'next/cache'`: Specifies the module from where we are importing the function. In this case, it's the `next/cache` module, which provides functions related to data caching in Next.js.
+- `unstable_noStore`: This function is considered "unstable" as it may change in future versions of Next.js. However, it's currently used to disable static rendering and caching for a specific component.
 
 **Here are some scenarios where you might use `noStore`:**
 
-* **Fetching data that constantly changes:** If you're fetching data that updates frequently, like live stock prices or social media feeds, you wouldn't want it to be cached as it would become outdated quickly. In such cases, you can use `noStore` to ensure the data is always fetched fresh on every request.
-*
-* **Rendering personalized content:** If you need to render content based on the user's specific information or preferences, static rendering wouldn't be appropriate. Here, `noStore` ensures the content is dynamically generated on each request, reflecting the user's specific context.
-*
-* **Server-side components:** When working with server-side components, which allow you to render content on the server for SEO and performance benefits, you might want to disable caching for certain sections that require dynamic updates. `noStore` helps achieve this.
+- **Fetching data that constantly changes:** If you're fetching data that updates frequently, like live stock prices or social media feeds, you wouldn't want it to be cached as it would become outdated quickly. In such cases, you can use `noStore` to ensure the data is always fetched fresh on every request.
+-
+- **Rendering personalized content:** If you need to render content based on the user's specific information or preferences, static rendering wouldn't be appropriate. Here, `noStore` ensures the content is dynamically generated on each request, reflecting the user's specific context.
+-
+- **Server-side components:** When working with server-side components, which allow you to render content on the server for SEO and performance benefits, you might want to disable caching for certain sections that require dynamic updates. `noStore` helps achieve this.
 
 **It's important to remember that using `noStore` can have performance implications:**
 
-* By opting out of static rendering, you might lose some of the performance benefits Next.js offers for static pages.
-* Frequent data fetches without caching can add additional load on your server.
+- By opting out of static rendering, you might lose some of the performance benefits Next.js offers for static pages.
+- Frequent data fetches without caching can add additional load on your server.
 
 Therefore, use `noStore` cautiously and only when necessary. For static content that doesn't change frequently, relying on Next.js's default caching mechanisms will provide better performance and scalability.
 
+## Loading
+
+Next js looks for a component called `loading.tsx` to use as a loading placeholder before content is gotten from the backend.
+
+- We will set a skeleton for the loading by importing the skleton componet into the `loading.tsx` file.
+
+### issue
+
+`loading.tsx` is getting apllied to the pages in invoice and customers
+
+-Since `loading.tsx` is a level higher than /invoices/page.tsx and /customers/page.tsx in the file system, it's also applied to those pages.
+
+### Route groups
+
+We can change this with Route Groups. Create a new folder called /(overview) inside the dashboard folder. Then, move your `loading.tsx` and `page.tsx` files inside the folder:
