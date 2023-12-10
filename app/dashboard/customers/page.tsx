@@ -3,7 +3,7 @@ import React from 'react';
 function CustomerPage() {
   return (
     <div>
-      <p>customerss</p>
+      <p>customers</p>
     </div>
   );
 }

@@ -1,3 +1,9 @@
+Before you read thtough, these are the take away.
+
+- clsx library lets you render your classNames conditionally
+- In Next js, you get to choose whether you want to use static or dynamic rendering for your page. `no store` allows you to opt out of static rendering to prepare you for displaying content that changes dynamically.
+- `Suspense` is a powerful API that can help you decide the behavior of your components and how they load on your screen.
+
 ## Next.js App Router Course - Starter
 
 This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
@@ -40,9 +46,7 @@ that contains the layout of how the page will be presented on the screen. This `
 
 ## Navigation
 
-Using the `usePathname` hook we check to see if the pathname of the URL matches the link.href, and if it does.
-
-We use `clsx` to conditionally render the classNames of the button for example, setting a background color to indicate that we are on the page of the current link that we have clicked if the `pathname === link.href` just like in the `dashboard/nav-link.tsx` component.
+Using the `usePathname` hook we check to see if the pathname of the URL matches the link.href, and if it does. We use `clsx` to conditionally render the classNames of the button for example, changing the link background color according to the conditiopnally rendered className so that indicate when we are on the page of the current link that we have clicked. see demo as We check if the `pathname === link.href` in the `dashboard/nav-link.tsx` component.
 
 # next-dashboard
 
@@ -104,3 +108,16 @@ Next js looks for a component called `loading.tsx` to use as a loading placehold
 ### Route groups
 
 We can change this with Route Groups. Create a new folder called /(overview) inside the dashboard folder. Then, move your `loading.tsx` and `page.tsx` files inside the folder:
+
+# Streaming
+
+Streaming allows us to load content in small chunks so that trying to loading the whole content does not cause us to slow our website. This can be done in 2 ways
+
+- using the `loading.tsx` component
+- using `<suspense>`
+
+Using suspense we can create a boundary by wrapping whatever compnent we want to laod within a `<suspense>` element.
+
+### loading trick
+
+If you want multiple compnents to load at the same time, first put all the component into parent component and then wrap parent component in a `<suspense>`.
